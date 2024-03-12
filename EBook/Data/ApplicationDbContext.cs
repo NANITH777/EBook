@@ -1,6 +1,8 @@
-﻿namespace EBook.Data
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace EBook.Data
 {
-    public class ApplicationDbContext
+    public class ApplicationDbContext:DbContext
     {
     }
 }
