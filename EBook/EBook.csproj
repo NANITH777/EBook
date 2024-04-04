@@ -13,7 +13,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0-preview.2.24158.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EBook.DataAccess\EBook.DataAccess.csproj" />
+    <ProjectReference Include="..\EBook.Models\EBook.Models.csproj" />
   </ItemGroup>
 
 </Project>
