@@ -22,7 +22,7 @@ namespace EBook.Areas.Admin.Controllers
         public IActionResult Index()
         {
             //pour afficher la liste des categories
-            List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
             
             return View(objProductList);
         }
