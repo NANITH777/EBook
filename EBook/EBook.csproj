@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EBook.DataAccess\EBook.DataAccess.csproj" />
     <ProjectReference Include="..\EBook.Models\EBook.Models.csproj" />
+    <ProjectReference Include="..\EBook.Utility\EBook.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>
