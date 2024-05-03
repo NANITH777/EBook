@@ -47,9 +47,9 @@ function Delete (url)
             $.ajax({
                 url: url,
                 type: 'DELETE',
-                succes: function (data) {
+                success: function (data) {
                     dataTable.ajax.reload();
-                    toastr.succes(data.message);
+                    toastr.success(data.message);
                 }
             })
         }
