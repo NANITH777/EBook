@@ -3,6 +3,8 @@ using EBook.DataAccess.Repository;
 using EBook.DataAccess.Repository.IRepository;
 using EBook.Models;
 using EBook.Models.ViewModels;
+using EBook.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -10,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace EBook.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
