@@ -14,6 +14,7 @@ namespace EBook.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         /*Pour implementer les donnees dans un tableau de la base de donnee sur Core on utullise la fonction
