@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace EBook.Areas.Customer.Controllers
 {
-    [Area("Customer")]
+    [Area("customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -60,9 +60,12 @@ namespace EBook.Areas.Customer.Controllers
             {
                 //add cart record
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
-               
+                //_unitOfWork.Save();
+                //HttpContext.Session.SetInt32(Commun.SessionCart,
+                //    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
 
+            TempData["success"] = "Cart updated successfully";
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
