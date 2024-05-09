@@ -18,7 +18,7 @@ namespace EBook.Models
         public string? City { get; set; }
         public string? State { get; set; }
         public string? PostalCode { get; set; }
-        public int? ComapnyId { get; set; }
+        public int? CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         [ValidateNever]
         public Company Company { get; set; }
