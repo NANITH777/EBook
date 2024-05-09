@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace EBook.Areas.Customer.Controllers
 {
-    [Area("customer")]
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
