@@ -30,6 +30,37 @@ namespace EBook.Data
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
                 );
 
+            modelBuilder.Entity<Company>().HasData(
+                new Company { 
+                    Id = 1, 
+                    Name = "Allooo", 
+                    StressAdress ="hghghgg",
+                    City = "Sakarya", 
+                    State="Adapazari", 
+                    PostalCode="123232", 
+                    PhoneNumber="05363733333" 
+                },
+                new Company 
+                { 
+                    Id = 2, 
+                    Name = "dfdfdf",
+                    StressAdress = "hghghgg",
+                    City = "Sakarya", 
+                    State = "Adapazari", 
+                    PostalCode = "123232", 
+                    PhoneNumber = "05363733333" 
+                },
+                new Company {
+                    Id = 3, 
+                    Name = "sdsds",
+                    StressAdress = "hghghgg",
+                    City = "Sakarya", 
+                    State = "Adapazari", 
+                    PostalCode = "123232", 
+                    PhoneNumber = "05363733333" 
+                }
+            );
+
             modelBuilder.Entity<Product>().HasData(
                new Product
                {
