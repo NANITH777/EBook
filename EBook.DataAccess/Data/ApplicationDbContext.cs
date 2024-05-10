@@ -17,6 +17,8 @@ namespace EBook.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         /*Pour implementer les donnees dans un tableau de la base de donnee sur Core on utullise la fonction
         protected override void OnModelCreating(ModelBuilder modelBuilder){}*/
