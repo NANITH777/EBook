@@ -86,8 +86,7 @@ namespace EBook.Areas.Customer.Controllers
             shoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
             shoppingCartVM.OrderHeader.ApplicationUserId = userId;
 
-			shoppingCartVM.OrderHeader.ApplicationUser = _unitOfWork.ApplicationUser.Get
-				(u => u.Id == userId);
+			ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
 
 
 			foreach (var cart in shoppingCartVM.ShoppingCartList)
@@ -96,7 +95,7 @@ namespace EBook.Areas.Customer.Controllers
 				shoppingCartVM.OrderHeader.OrderTotal += (cart.Price * cart.Count);
 			}
 
-			if (shoppingCartVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0)
+			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
 			{
 				//it is a regular customer account and we need to capture payment
 				shoppingCartVM.OrderHeader.PaymentStatus = SD.PaymentStatusPending;
@@ -127,8 +126,68 @@ namespace EBook.Areas.Customer.Controllers
 				_unitOfWork.Save();
 			}
 
-			return View(shoppingCartVM);
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
+            {
+                //it is a regular customer account and we need to capture payment
+                // stripe logic
+
+                //    var domain = "https://localhost:7269/";
+
+                //    var options = new SessionCreateOptions
+                //    {
+                //        SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
+                //        CancelUrl = domain + "customer/cart/index",
+                //        LineItems = new List<SessionLineItemOptions>(),
+
+                //        Mode = "payment",
+                //    };
+
+                //    foreach (var item in shoppingCartVM.ShoppingCartList)
+                //    {
+                //        var sessionLineItem = new SessionLineItemOptions
+                //        {
+                //            PriceData = new SessionLineItemPriceDataOptions
+                //            {
+                //                UnitAmount = (long)(item.Price * 100),//$20.50 => 2050
+                //                Currency = "usd",
+                //                ProductData = new SessionLineItemPriceDataProductDataOptions
+                //                {
+                //                    Name = item.Product.Title
+                //                },
+                //            },
+                //            Quantity = item.Count
+
+                //        };
+                //        options.LineItems.Add(sessionLineItem);
+                //    }
+                //}
+            }
+			return RedirectToAction(nameof(OrderConfirmation), new {id=shoppingCartVM.OrderHeader.Id});
+
 		}
+
+        public IActionResult OrderConfirmation(int id)
+        {
+            //OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
+            //if (orderHeader.PaymentStatus != Commun.PaymentStatusDelayedPayment)
+            //{
+            //    //this is an order bu customer
+            //    var service = new SessionService();
+            //    Session session = service.Get(orderHeader.SessionId);
+
+            //    if (session.PaymentStatus.ToLower() == "paid")
+            //    {
+            //        _unitOfWork.OrderHeader
+            //        .UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+            //        _unitOfWork.OrderHeader.UpdateStatus(id, Commun.StatusApproved, Commun.PaymentStatusApproved);
+            //        _unitOfWork.Save();
+            //    }
+
+            //    HttpContext.Session.Clear();
+
+            //}
+            return View(id);
+        }
 
 		public IActionResult Plus(int cartId)
         {
@@ -139,6 +198,8 @@ namespace EBook.Areas.Customer.Controllers
             _unitOfWork.Save();
             return RedirectToAction(nameof(Index));
         }
+
+
         public IActionResult Minus(int cartId)
         {
             var cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.Id == cartId);
