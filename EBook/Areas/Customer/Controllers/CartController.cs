@@ -4,6 +4,7 @@ using EBook.Models.ViewModels;
 using EBook.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe.Checkout;
 using System.Security.Claims;
 
 namespace EBook.Areas.Customer.Controllers
@@ -131,61 +132,55 @@ namespace EBook.Areas.Customer.Controllers
                 //it is a regular customer account and we need to capture payment
                 // stripe logic
 
-                //    var domain = "https://localhost:7269/";
+                var domain = "https://localhost:7269/";
 
-                //    var options = new SessionCreateOptions
-                //    {
-                //        SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
-                //        CancelUrl = domain + "customer/cart/index",
-                //        LineItems = new List<SessionLineItemOptions>(),
+                var options = new SessionCreateOptions
+                {
+                    SuccessUrl = domain + $"customer/cart/OrderConfirmation?id={shoppingCartVM.OrderHeader.Id}",
+                    CancelUrl = domain + "customer/cart/index",
+                    LineItems = new List<SessionLineItemOptions>(),
 
-                //        Mode = "payment",
-                //    };
+                    Mode = "payment",
+                };
 
-                //    foreach (var item in shoppingCartVM.ShoppingCartList)
-                //    {
-                //        var sessionLineItem = new SessionLineItemOptions
-                //        {
-                //            PriceData = new SessionLineItemPriceDataOptions
-                //            {
-                //                UnitAmount = (long)(item.Price * 100),//$20.50 => 2050
-                //                Currency = "usd",
-                //                ProductData = new SessionLineItemPriceDataProductDataOptions
-                //                {
-                //                    Name = item.Product.Title
-                //                },
-                //            },
-                //            Quantity = item.Count
+                foreach (var item in shoppingCartVM.ShoppingCartList)
+                {
+                    var sessionLineItem = new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmount = (long)(item.Price * 100),//$20.50 => 2050
+                            Currency = "usd",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = item.Product.Title
+                            },
+                        },
+                        Quantity = item.Count
 
-                //        };
-                //        options.LineItems.Add(sessionLineItem);
-                //    }
-                //}
+                    };
+                    options.LineItems.Add(sessionLineItem);
+                }
+
+
+                var service = new SessionService();
+                Session session = service.Create(options);
+
+                _unitOfWork.OrderHeader
+                    .UpdateStripePaymentID(shoppingCartVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+                _unitOfWork.Save();
+                Response.Headers.Add("Location", session.Url);
+                return new StatusCodeResult(303);
+
             }
-			return RedirectToAction(nameof(OrderConfirmation), new {id=shoppingCartVM.OrderHeader.Id});
 
-		}
+
+            return RedirectToAction(nameof(OrderConfirmation), new { id = shoppingCartVM.OrderHeader.Id });
+
+        }
 
         public IActionResult OrderConfirmation(int id)
         {
-            //OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
-            //if (orderHeader.PaymentStatus != Commun.PaymentStatusDelayedPayment)
-            //{
-            //    //this is an order bu customer
-            //    var service = new SessionService();
-            //    Session session = service.Get(orderHeader.SessionId);
-
-            //    if (session.PaymentStatus.ToLower() == "paid")
-            //    {
-            //        _unitOfWork.OrderHeader
-            //        .UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
-            //        _unitOfWork.OrderHeader.UpdateStatus(id, Commun.StatusApproved, Commun.PaymentStatusApproved);
-            //        _unitOfWork.Save();
-            //    }
-
-            //    HttpContext.Session.Clear();
-
-            //}
             return View(id);
         }
 
