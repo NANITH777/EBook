@@ -1,6 +1,7 @@
 ﻿using EBook.DataAccess.Repository;
 using EBook.DataAccess.Repository.IRepository;
 using EBook.Models;
+using EBook.Models.ViewModels;
 using EBook.Utility;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,19 @@ namespace EBook.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Details(int orderId)
+        {
+            OrderVM orderVM= new()
+            {
+                OrderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == orderId, includeProperties: "ApplicationUser"),
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderHeaderId == orderId, includeProperties: "Product"),
+            };
+
+
+
+            return View(orderVM);
         }
 
         #region API CALLS
