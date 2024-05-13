@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace EBook.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize(Roles =SD.Role_Admin)]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -19,7 +19,7 @@ namespace EBook.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            //pour afficher la list des categories
+            //pour afficher la liste des categories
             List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList();
             return View(objCategoryList);
         }
