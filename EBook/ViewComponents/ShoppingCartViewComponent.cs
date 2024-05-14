@@ -1,4 +1,4 @@
-﻿using EBook.DataAccess.Repository;
+﻿using EBook.DataAccess.Repository.IRepository;
 using EBook.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -8,8 +8,8 @@ namespace EBook.ViewComponents
 {
     public class ShoppingCartViewComponent: ViewComponent
     {
-        private readonly UnitOfWork _unitOfWork;
-        public ShoppingCartViewComponent(UnitOfWork unitOfWork)
+        private readonly IUnitOfWork _unitOfWork;
+        public ShoppingCartViewComponent(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
