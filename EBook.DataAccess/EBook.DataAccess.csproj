@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EBook.Models\EBook.Models.csproj" />
+    <ProjectReference Include="..\EBook.Utility\EBook.Utility.csproj" />
   </ItemGroup>
 
 </Project>
