@@ -13,7 +13,7 @@ namespace EBook.Utility
     public class EmailSender : IEmailSender
     {
         public string SendGridSecret { get; set; }
-        public EmailSender(IConfiguration _config) 
+        public EmailSender(IConfiguration _config)
         {
             SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey");
         }
@@ -22,7 +22,7 @@ namespace EBook.Utility
             // Logic to send emails
 
             var client = new SendGridClient(SendGridSecret);
-            var from = new EmailAddress("b201200576@sakarya.edu.tr", "EBook");
+            var from = new EmailAddress("nanifulchany@gmail.com", "EBook");
             var to = new EmailAddress(email);
             var message = MailHelper.CreateSingleEmail(from, to, subject,"",htmlMessage);
 
