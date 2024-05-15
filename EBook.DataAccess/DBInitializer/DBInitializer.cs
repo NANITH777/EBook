@@ -61,7 +61,7 @@ namespace EBook.DataAccess.DBInitializer
                 _userManager.CreateAsync(new ApplicationUser
                 {
                     UserName = "nanith@sakarya.edu.tr",
-                    Email = "nanith@sakarya.edu.tr",
+                    Email = "b201200576@sakarya.edu.tr",
                     Name = "Nanith",
                     PhoneNumber = "05346060000",
                     StressAdress = "Serdivan",
