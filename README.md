@@ -111,8 +111,6 @@ To deploy the application, follow these steps:
 
 Contributions are welcome! Feel free to submit issues and pull requests to enhance the project.
 
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ---
 
 This README provides an overview and guide to the EBook e-commerce project. It includes information on setting up, using, and deploying the application, as well as a detailed look at the project structure.
