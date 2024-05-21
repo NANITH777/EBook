@@ -12,7 +12,6 @@ Welcome to the EBook e-commerce application repository! This project is a comple
 6. [Deployment](#deployment)
 7. [Project Structure](#project-structure)
 8. [Contributing](#contributing)
-9. [License](#license)
 
 ## Overview
 
