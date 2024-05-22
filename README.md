@@ -9,9 +9,8 @@ Welcome to the EBook e-commerce application repository! This project is a comple
 3. [Requirements](#requirements)
 4. [Setup](#setup)
 5. [Usage](#usage)
-6. [Deployment](#deployment)
-7. [Project Structure](#project-structure)
-8. [Contributing](#contributing)
+6. [Project Structure](#project-structure)
+7. [Contributing](#contributing)
 
 ## Overview
 
@@ -69,32 +68,7 @@ Follow these steps to set up the project locally:
 
 ## Usage
 
-Once the application is running, you can access it at `http://localhost:5000`. Use the admin dashboard to manage books, users, and orders. Regular users can browse books, add them to the cart, and complete purchases.
-
-## Deployment
-
-To deploy the application, follow these steps:
-
-### Deploy to Azure
-
-1. **Create an Azure Web App**:
-   - Set up an Azure Web App service.
-   - Configure the SQL Database service.
-
-2. **Publish from Visual Studio**:
-   - Right-click the project in Visual Studio and select `Publish`.
-   - Choose `Azure` as the target and follow the prompts to deploy.
-
-### Deploy to IIS
-
-1. **Configure IIS**:
-   - Install the ASP.NET Core Hosting Bundle on the server.
-   - Create a new website in IIS and configure the application pool.
-
-2. **Publish the Application**:
-   - Right-click the project in Visual Studio and select `Publish`.
-   - Choose `Folder` as the target and publish to a local folder.
-   - Copy the published files to the IIS site directory.
+Once the application is running, you can access it at `https://localhost:7280/`. Use the admin dashboard to manage books, users, and orders. Regular users can browse books, add them to the cart, and complete purchases.
 
 ## Project Structure
 
