@@ -51,7 +51,8 @@ namespace EBook.Areas.Admin.Controllers
             else
             {
                 // Update
-                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id, 
+                    includeProperties:"ProductImages");
                 return View(productVM);
             }
         }
@@ -82,7 +83,7 @@ namespace EBook.Areas.Admin.Controllers
                         string productPath = @"images\products\product-" + productVM.Product.Id;
                         string finalPath = Path.Combine(wwwRootPath, productPath);
 
-                        if(Directory.Exists(finalPath))
+                        if(!Directory.Exists(finalPath))
                         {
                             Directory.CreateDirectory(finalPath);
                         }
