@@ -68,11 +68,7 @@ Follow these steps to set up the project locally:
 
 ## Usage
 
-Once the application is running, you can access it at `http://localhost:5000`. Use the admin dashboard to manage books, users, and orders. Regular users can browse books, add them to the cart, and complete purchases.
-
-sh from Visual Studio**:
-   - Right-click the project in Visual Studio and select `Publish`.
-   - Choose `Azure` as the target and follow the prompts to deploy.
+Once the application is running, you can access it at `https://localhost:7280/`. Use the admin dashboard to manage books, users, and orders. Regular users can browse books, add them to the cart, and complete purchases.
 
 ## Project Structure
 
